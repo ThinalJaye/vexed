@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* Theme tokens                                                        */
+/* d-* dark sections | l-* light sections | h-* hero + navigation      */
+/* accent / stage / tint = per-theme colour accents for the hero       */
+/* ------------------------------------------------------------------ */
+
+/* Registered so the variables themselves animate when data-theme changes
+   (this also animates gradients that use them). */
+@property --d-bg      { syntax: "<color>"; inherits: true; initial-value: #080808; }
+@property --d-surface { syntax: "<color>"; inherits: true; initial-value: #121212; }
+@property --d-fg      { syntax: "<color>"; inherits: true; initial-value: #F4F4F0; }
+@property --d-soft    { syntax: "<color>"; inherits: true; initial-value: #DADADA; }
+@property --d-muted   { syntax: "<color>"; inherits: true; initial-value: #8A8A8A; }
+@property --d-border  { syntax: "<color>"; inherits: true; initial-value: #242424; }
+
+@property --l-bg      { syntax: "<color>"; inherits: true; initial-value: #F4F4F0; }
+@property --l-surface { syntax: "<color>"; inherits: true; initial-value: #ECECE6; }
+@property --l-fg      { syntax: "<color>"; inherits: true; initial-value: #080808; }
+@property --l-soft    { syntax: "<color>"; inherits: true; initial-value: #242424; }
+@property --l-muted   { syntax: "<color>"; inherits: true; initial-value: #5E5E5E; }
+@property --l-border  { syntax: "<color>"; inherits: true; initial-value: #DADADA; }
+
+@property --h-bg       { syntax: "<color>"; inherits: true; initial-value: #080808; }
+@property --h-fg       { syntax: "<color>"; inherits: true; initial-value: #F4F4F0; }
+@property --h-soft     { syntax: "<color>"; inherits: true; initial-value: #DADADA; }
+@property --h-muted    { syntax: "<color>"; inherits: true; initial-value: #8A8A8A; }
+@property --h-border   { syntax: "<color>"; inherits: true; initial-value: #2E2E2E; }
+@property --h-tint     { syntax: "<color>"; inherits: true; initial-value: #808080; }
+@property --h-tint-o   { syntax: "<number>"; inherits: true; initial-value: 0; }
+@property --h-photo-o  { syntax: "<number>"; inherits: true; initial-value: 0.85; }
+@property --h-stage    { syntax: "<color>"; inherits: true; initial-value: #DCDAD2; }
+@property --h-stage-fg { syntax: "<color>"; inherits: true; initial-value: #171717; }
+@property --accent     { syntax: "<color>"; inherits: true; initial-value: #C9C7BF; }
+
+/* 01 OBSIDIAN — deep black, charcoal, off-white type */
+:root,
+[data-theme="obsidian"] {
+  --d-bg: #080808;  --d-surface: #121212; --d-fg: #F4F4F0;
+  --d-soft: #DADADA; --d-muted: #8A8A8A;  --d-border: #242424;
+
+  --l-bg: #F4F4F0;  --l-surface: #ECECE6; --l-fg: #080808;
+  --l-soft: #242424; --l-muted: #5E5E5E;  --l-border: #DADADA;
+
+  --h-bg: #080808;  --h-fg: #F4F4F0;      --h-soft: #DADADA;
+  --h-muted: #9A9A9A; --h-border: #2E2E2E;
+  --h-tint: #808080; --h-tint-o: 0; --h-photo-o: 0.88;
+  --h-stage: #E6E4DC; --h-stage-fg: #171717; --accent: #C9C7BF;
+}
+
+/* 02 BONE — warm off-white, soft white, dark type */
+[data-theme="bone"] {
+  --d-bg: #1E1C19;  --d-surface: #292622; --d-fg: #F7F4EC;
+  --d-soft: #DAD6CB; --d-muted: #A09B90;  --d-border: #3A3732;
+
+  --l-bg: #FAF8F2;  --l-surface: #F0ECE1; --l-fg: #14120F;
+  --l-soft: #2E2B26; --l-muted: #5F5A50;  --l-border: #DDD8CB;
+
+  --h-bg: #EAE5D8;  --h-fg: #14120F;      --h-soft: #2C2823;
+  --h-muted: #575248; --h-border: #CBC4B2;
+  --h-tint: #E6DCC2; --h-tint-o: 0.35; --h-photo-o: 0.38;
+  --h-stage: #24221E; --h-stage-fg: #F0EEE6; --accent: #8C826C;
+}
+
+/* 03 ASH — neutral grey, charcoal, off-white */
+[data-theme="ash"] {
+  --d-bg: #232322;  --d-surface: #2F2F2E; --d-fg: #F4F4F0;
+  --d-soft: #D6D6D2; --d-muted: #A3A3A0;  --d-border: #424240;
+
+  --l-bg: #D6D6D2;  --l-surface: #C8C8C4; --l-fg: #111111;
+  --l-soft: #262626; --l-muted: #474745;  --l-border: #B3B3AE;
+
+  --h-bg: #3F3F3D;  --h-fg: #F4F4F0;      --h-soft: #E2E2DE;
+  --h-muted: #C8C8C3; --h-border: #5E5E5B;
+  --h-tint: #92928E; --h-tint-o: 0.42; --h-photo-o: 0.64;
+  --h-stage: #262625; --h-stage-fg: #EFEFEB; --accent: #C2C2BC;
+}
+
+/* 04 NAVY — deep blue, cool neutrals, ice-white type */
+[data-theme="navy"] {
+  --d-bg: #0D1622;  --d-surface: #162333; --d-fg: #F1F4F7;
+  --d-soft: #CBD4DE; --d-muted: #8E9DAE;  --d-border: #233449;
+
+  --l-bg: #EDF1F5;  --l-surface: #E0E7EE; --l-fg: #0C1520;
+  --l-soft: #1E2C3B; --l-muted: #4C5C6E;  --l-border: #C8D3DF;
+
+  --h-bg: #111D2C;  --h-fg: #F1F4F7;      --h-soft: #CFD8E2;
+  --h-muted: #96A6B8; --h-border: #2B3E56;
+  --h-tint: #25364B; --h-tint-o: 0.65; --h-photo-o: 0.82;
+  --h-stage: #DCE2E8; --h-stage-fg: #152130; --accent: #7F9BBA;
+}
+
+/* 05 OLIVE — muted olive, warm greys, soft cream type */
+[data-theme="olive"] {
+  --d-bg: #171A13;  --d-surface: #22261B; --d-fg: #F2F2EA;
+  --d-soft: #D3D5C7; --d-muted: #9BA08B;  --d-border: #333827;
+
+  --l-bg: #EFF0E6;  --l-surface: #E2E4D5; --l-fg: #14160F;
+  --l-soft: #2A2F20; --l-muted: #565C46;  --l-border: #CCD0B9;
+
+  --h-bg: #23281C;  --h-fg: #F2F2EA;      --h-soft: #D5D8C9;
+  --h-muted: #A6AB94; --h-border: #3B422E;
+  --h-tint: #70765D; --h-tint-o: 0.6; --h-photo-o: 0.8;
+  --h-stage: #DFE1D2; --h-stage-fg: #1D2116; --accent: #A5AD86;
+}
+
+/* Smooth, GPU-friendly theme crossfade: only the variables on root/scope
+   transition; descendants inherit the animated values. */
+html[data-theme],
+.theme-scope {
+  transition-property:
+    --d-bg, --d-surface, --d-fg, --d-soft, --d-muted, --d-border,
+    --l-bg, --l-surface, --l-fg, --l-soft, --l-muted, --l-border,
+    --h-bg, --h-fg, --h-soft, --h-muted, --h-border,
+    --h-tint, --h-tint-o, --h-photo-o, --h-stage, --h-stage-fg, --accent;
+  transition-duration: 750ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  --color-d-bg: var(--d-bg);
+  --color-d-surface: var(--d-surface);
+  --color-d-fg: var(--d-fg);
+  --color-d-soft: var(--d-soft);
+  --color-d-muted: var(--d-muted);
+  --color-d-border: var(--d-border);
+
+  --color-l-bg: var(--l-bg);
+  --color-l-surface: var(--l-surface);
+  --color-l-fg: var(--l-fg);
+  --color-l-soft: var(--l-soft);
+  --color-l-muted: var(--l-muted);
+  --color-l-border: var(--l-border);
+
+  --color-h-bg: var(--h-bg);
+  --color-h-fg: var(--h-fg);
+  --color-h-soft: var(--h-soft);
+  --color-h-muted: var(--h-muted);
+  --color-h-border: var(--h-border);
+  --color-h-stage: var(--h-stage);
+  --color-h-stage-fg: var(--h-stage-fg);
+  --color-accent: var(--accent);
+
+  --font-display: var(--font-syne), system-ui, sans-serif;
+  --font-sans: var(--font-space-grotesk), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.25rem;
+  background-color: var(--h-bg);
+  color: var(--h-fg);
+}
+
+@media (min-width: 640px) {
+  html {
+    scroll-padding-top: 6rem;
+  }
+}
+
+body {
+  background-color: var(--h-bg);
+  color: var(--h-fg);
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--h-fg);
+  color: var(--h-bg);
+}
+
+/* Subtle editorial film grain overlay */
+.editorial-grain {
+  background-image: radial-gradient(rgba(244, 244, 240, 0.06) 1px, transparent 0);
+  background-size: 3px 3px;
+}
+
+/* Smooth infinite marquee tracks */
+@keyframes vexed-marquee-left {
+  0% {
+    transform: translate3d(0%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes vexed-marquee-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0%, 0, 0);
+  }
+}
+
+.animate-marquee-left {
+  animation: vexed-marquee-left 34s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: vexed-marquee-right 38s linear infinite;
+}
+
+.marquee-wrapper:hover .animate-marquee-left,
+.marquee-wrapper:hover .animate-marquee-right {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  html[data-theme],
+  .theme-scope {
+    transition-duration: 1ms;
+  }
+
+  .animate-marquee-left,
+  .animate-marquee-right {
+    animation: none;
+  }
+}
